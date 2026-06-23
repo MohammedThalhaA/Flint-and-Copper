@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export async function GET() {
   try {
@@ -36,10 +42,10 @@ export async function POST(request: Request) {
     );
 
     // Send email notification to owner
-    if (process.env.RESEND_API_KEY) {
-      await resend.emails.send({
-        from: 'Flint & Copper <onboarding@resend.dev>', // Use verified domain in prod
-        to: 'hello@flintandcopper.example', // Salon owner email (mocked for demo, replace with real)
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      await transporter.sendMail({
+        from: `"Flint & Copper" <${process.env.SMTP_USER}>`,
+        to: process.env.SALON_NOTIFICATION_EMAIL || process.env.SMTP_USER,
         subject: 'New Customer Review Pending Approval',
         html: `
           <h2>New Customer Review Pending</h2>

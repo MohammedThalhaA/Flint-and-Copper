@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-// Use a placeholder if not set to avoid crashing during development build/run
-const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export async function POST(request: Request) {
   try {
@@ -41,12 +46,12 @@ export async function POST(request: Request) {
 
     const bookingId = insertRes.rows[0].id;
 
-    // 3. Send emails via Resend
-    if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 're_placeholder') {
+    // 3. Send emails via Nodemailer
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
       try {
         // To Customer
-        await resend.emails.send({
-          from: 'Flint & Copper <hello@flintandcopper.example.com>',
+        await transporter.sendMail({
+          from: `"Flint & Copper" <${process.env.SMTP_USER}>`,
           to: email,
           subject: 'Your Booking Confirmation - Flint & Copper',
           html: `
@@ -65,10 +70,10 @@ export async function POST(request: Request) {
         });
 
         // To Salon
-        const salonEmail = process.env.SALON_NOTIFICATION_EMAIL || 'hello@flintandcopper.example.com';
-        await resend.emails.send({
-          from: 'System <notifications@flintandcopper.example.com>',
-          to: salonEmail,
+        const salonEmail = process.env.SALON_NOTIFICATION_EMAIL || process.env.SMTP_USER;
+        await transporter.sendMail({
+          from: `"System" <${process.env.SMTP_USER}>`,
+          to: salonEmail as string,
           subject: `New Booking: ${name} for ${serviceName}`,
           html: `
             <div>
@@ -87,7 +92,7 @@ export async function POST(request: Request) {
         // Continue, we still booked successfully
       }
     } else {
-      console.log('Skipping email send. RESEND_API_KEY is not configured or is a placeholder.');
+      console.log('Skipping email send. SMTP_USER is not configured.');
       console.log('Would have sent:', { to: email, subject: 'Booking Confirmed' });
     }
 

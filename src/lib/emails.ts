@@ -1,6 +1,12 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 type BookingData = {
   customer_name: string;
@@ -78,16 +84,13 @@ export async function sendBookingConfirmationEmail(booking: BookingData) {
     <p style="color: #444444; line-height: 1.6; font-size: 16px; margin-top: 30px;">We look forward to welcoming you.</p>
   `;
 
-  const response = await resend.emails.send({
-    from: 'Flint & Copper <onboarding@resend.dev>', // Use verified domain in prod
+  const response = await transporter.sendMail({
+    from: `"Flint & Copper" <${process.env.SMTP_USER}>`,
     to: booking.customer_email,
     subject: 'Your Flint & Copper Appointment is Confirmed',
     html: baseEmailTemplate(content),
   });
 
-  if (response.error) {
-    throw new Error(response.error.message || "Resend API error");
-  }
   return response;
 }
 
@@ -110,15 +113,12 @@ export async function sendBookingCancellationEmail(booking: BookingData) {
     <p style="color: #444444; line-height: 1.6; font-size: 16px; margin-top: 30px;">Warm regards,</p>
   `;
 
-  const response = await resend.emails.send({
-    from: 'Flint & Copper <onboarding@resend.dev>', // Use verified domain in prod
+  const response = await transporter.sendMail({
+    from: `"Flint & Copper" <${process.env.SMTP_USER}>`,
     to: booking.customer_email,
     subject: 'Your Flint & Copper Appointment Has Been Cancelled',
     html: baseEmailTemplate(content),
   });
 
-  if (response.error) {
-    throw new Error(response.error.message || "Resend API error");
-  }
   return response;
 }

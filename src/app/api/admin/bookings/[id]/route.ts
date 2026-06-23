@@ -33,7 +33,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     let emailSent = false;
     let emailError = undefined;
 
-    if (process.env.RESEND_API_KEY && (status === 'confirmed' || status === 'cancelled')) {
+    if (process.env.SMTP_USER && (status === 'confirmed' || status === 'cancelled')) {
       try {
         if (status === 'confirmed') {
           await sendBookingConfirmationEmail(booking);
@@ -45,8 +45,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         console.error("Failed to send booking email:", err);
         emailError = err.message || "Email sending failed";
       }
-    } else if (!process.env.RESEND_API_KEY && (status === 'confirmed' || status === 'cancelled')) {
-      emailError = "RESEND_API_KEY is not configured";
+    } else if (!process.env.SMTP_USER && (status === 'confirmed' || status === 'cancelled')) {
+      emailError = "SMTP_USER is not configured";
     }
 
     return NextResponse.json({ success: true, status, emailSent, emailError });
