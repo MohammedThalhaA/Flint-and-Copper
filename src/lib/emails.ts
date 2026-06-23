@@ -78,12 +78,17 @@ export async function sendBookingConfirmationEmail(booking: BookingData) {
     <p style="color: #444444; line-height: 1.6; font-size: 16px; margin-top: 30px;">We look forward to welcoming you.</p>
   `;
 
-  return await resend.emails.send({
-    from: 'Flint & Copper <sripadhmapiriya12@gmail.com>', // User's requested testing email
+  const response = await resend.emails.send({
+    from: 'Flint & Copper <onboarding@resend.dev>', // Use verified domain in prod
     to: booking.customer_email,
     subject: 'Your Flint & Copper Appointment is Confirmed',
     html: baseEmailTemplate(content),
   });
+
+  if (response.error) {
+    throw new Error(response.error.message || "Resend API error");
+  }
+  return response;
 }
 
 export async function sendBookingCancellationEmail(booking: BookingData) {
@@ -105,10 +110,15 @@ export async function sendBookingCancellationEmail(booking: BookingData) {
     <p style="color: #444444; line-height: 1.6; font-size: 16px; margin-top: 30px;">Warm regards,</p>
   `;
 
-  return await resend.emails.send({
-    from: 'Flint & Copper <sripadhmapiriya12@gmail.com>', // User's requested testing email
+  const response = await resend.emails.send({
+    from: 'Flint & Copper <onboarding@resend.dev>', // Use verified domain in prod
     to: booking.customer_email,
     subject: 'Your Flint & Copper Appointment Has Been Cancelled',
     html: baseEmailTemplate(content),
   });
+
+  if (response.error) {
+    throw new Error(response.error.message || "Resend API error");
+  }
+  return response;
 }

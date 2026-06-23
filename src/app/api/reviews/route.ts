@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // Send email notification to owner
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
-        from: 'Flint & Copper <sripadhmapiriya12@gmail.com>', // User's requested testing email
+        from: 'Flint & Copper <onboarding@resend.dev>', // Use verified domain in prod
         to: 'hello@flintandcopper.example', // Salon owner email (mocked for demo, replace with real)
         subject: 'New Customer Review Pending Approval',
         html: `
