@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #111111;
+  --color-copper: #AD7D56;
+  --color-dust: #CDB49E;
+  --color-ivory: #F5F1EC;
+  --color-copper-deep: #8C5A38;
+  
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+
+  --background: var(--color-ivory);
+  --foreground: var(--color-charcoal);
+}
+
+@layer base {
+  html {
+    font-size: 14px; /* Mobile root scaling */
+  }
+
+  @media (min-width: 768px) {
+    html {
+      font-size: 16px; /* Desktop root scaling */
+    }
+  }
+
+  html, body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    
+    /* Hide native scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar { 
+    display: none; /* Safari and Chrome */
+  }
+
+  ::selection {
+    background-color: var(--color-dust);
+    color: var(--color-charcoal);
+  }
+}
