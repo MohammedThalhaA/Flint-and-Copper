@@ -5,6 +5,8 @@ export const metadata = {
   title: "Bookings | Admin Portal | Flint & Copper",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminBookingsPage() {
   const [bookingsRes, servicesRes] = await Promise.all([
     query(`

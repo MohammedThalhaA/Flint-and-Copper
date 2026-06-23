@@ -5,6 +5,8 @@ export const metadata = {
   title: "Gallery | Admin Portal | Flint & Copper",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminGalleryPage() {
   const result = await query(`
     SELECT * FROM gallery_images 

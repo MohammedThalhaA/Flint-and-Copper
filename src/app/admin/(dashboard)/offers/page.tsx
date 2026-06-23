@@ -5,6 +5,8 @@ export const metadata = {
   title: "Offers | Admin Portal | Flint & Copper",
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminOffersPage() {
   const result = await query(`
     SELECT * FROM offers 

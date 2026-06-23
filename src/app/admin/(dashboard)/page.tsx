@@ -59,6 +59,8 @@ async function getDashboardData() {
   };
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboardPage() {
   const data = await getDashboardData();
   const { metrics, pendingBookings, upcomingBookings } = data;
