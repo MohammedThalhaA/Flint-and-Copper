@@ -40,9 +40,9 @@ export function BookingsClient({ initialBookings, services }: { initialBookings:
       if (res.ok) {
         const data = await res.json();
         router.refresh();
-        if (data.emailSent === false) {
-          toast(`Status updated, but email failed: ${data.emailError || "Unknown error"}`, "error");
-        } else if (newStatus === 'confirmed' || newStatus === 'cancelled') {
+        if (data.emailError) {
+          toast(`Status updated, but email failed: ${data.emailError}`, "error");
+        } else if (data.emailSent) {
           toast(`Booking ${newStatus} and email sent!`, "success");
         } else {
           toast("Status updated", "success");

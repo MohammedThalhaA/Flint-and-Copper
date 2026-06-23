@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     // 2. Insert booking
     const insertRes = await query(`
       INSERT INTO bookings (service_id, customer_name, customer_email, customer_phone, date, time_slot, status)
-      VALUES ($1, $2, $3, $4, $5, $6, 'confirmed')
+      VALUES ($1, $2, $3, $4, $5, $6, 'pending')
       RETURNING id
     `, [serviceId, name, email, phone, date, timeSlot]);
 
@@ -49,25 +49,6 @@ export async function POST(request: Request) {
     // 3. Send emails via Nodemailer
     if (process.env.SMTP_USER && process.env.SMTP_PASS) {
       try {
-        // To Customer
-        await transporter.sendMail({
-          from: `"Flint & Copper" <${process.env.SMTP_USER}>`,
-          to: email,
-          subject: 'Your Booking Confirmation - Flint & Copper',
-          html: `
-            <div style="font-family: sans-serif; color: #111111;">
-              <h2 style="color: #AD7D56;">Booking Confirmed</h2>
-              <p>Hello ${name},</p>
-              <p>Your appointment at Flint & Copper is confirmed.</p>
-              <ul>
-                <li><strong>Service:</strong> ${serviceName}</li>
-                <li><strong>Date:</strong> ${date}</li>
-                <li><strong>Time:</strong> ${timeSlot}</li>
-              </ul>
-              <p>We look forward to seeing you.</p>
-            </div>
-          `
-        });
 
         // To Salon
         const salonEmail = process.env.SALON_NOTIFICATION_EMAIL || process.env.SMTP_USER;
