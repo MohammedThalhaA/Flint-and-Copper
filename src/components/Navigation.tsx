@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import clsx from "clsx";
 
@@ -35,21 +36,20 @@ export function Navigation() {
     <>
       <header
         className={clsx(
-          "fixed top-0 w-full z-50 transition-all duration-500",
-          isScrolled
-            ? "bg-ivory/80 backdrop-blur-md border-b border-dust/30 py-4 shadow-sm"
-            : "bg-transparent py-6"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b",
+          (pathname !== "/" || isScrolled || isMobileMenuOpen) 
+            ? "bg-charcoal/95 backdrop-blur-md border-dust/10 py-4 shadow-md" 
+            : "bg-transparent border-transparent py-6"
         )}
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link href="/" className="group relative z-50">
-            <h1 className={clsx(
-              "font-serif text-2xl font-light tracking-wide flex flex-col uppercase leading-none transition-colors duration-300",
-              (pathname === "/" && !isScrolled && !isMobileMenuOpen) ? "text-ivory" : "text-charcoal"
+            <div className={clsx(
+              "transition-all duration-300",
+              (pathname === "/" && !isScrolled && !isMobileMenuOpen) ? "opacity-90" : "opacity-100"
             )}>
-              <span className="text-xl">Flint</span>
-              <span className="text-sm tracking-[0.2em] text-copper/90 italic ml-2">& Copper</span>
-            </h1>
+              <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={500} height={160} className="h-10 md:h-12 w-auto object-contain scale-[1.3] md:scale-[1.5] origin-left -translate-y-1.5 md:-translate-y-2.5" priority />
+            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -65,7 +65,7 @@ export function Navigation() {
                   <span
                     className={clsx(
                       "text-sm tracking-[0.15em] uppercase transition-colors duration-300",
-                      isActive ? "text-copper" : (pathname === "/" && !isScrolled) ? "text-ivory/90 group-hover:text-copper" : "text-charcoal group-hover:text-copper-deep"
+                      isActive ? "text-copper" : "text-ivory/90 group-hover:text-copper"
                     )}
                   >
                     {link.name}
@@ -90,8 +90,7 @@ export function Navigation() {
           {/* Mobile Menu Toggle */}
           <button
             className={clsx(
-              "md:hidden relative z-50 transition-colors p-2",
-              (pathname === "/" && !isScrolled && !isMobileMenuOpen) ? "text-ivory hover:text-copper" : "text-charcoal hover:text-copper"
+              "md:hidden transition-colors duration-300 relative z-50 p-2 text-ivory hover:text-copper"
             )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"

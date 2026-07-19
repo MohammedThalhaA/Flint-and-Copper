@@ -44,35 +44,35 @@ async function seedDatabase() {
         category: "Hair",
         description: "A precision cut tailored to your bone structure, followed by an intensive scalp treatment and hot towel finish.",
         duration: 60,
-        price: 120.00
+        price: 9600.00
       },
       {
         name: "Copper Glow Balayage",
         category: "Hair",
         description: "Hand-painted highlights for a dimensional, sun-kissed copper finish. Includes a deep conditioning gloss.",
         duration: 180,
-        price: 250.00
+        price: 20000.00
       },
       {
         name: "Oxidized Clay Facial",
         category: "Skin/Facial",
         description: "A purifying and restorative facial using mineral-rich clays to draw out impurities and leave skin glowing.",
         duration: 75,
-        price: 165.00
+        price: 13200.00
       },
       {
         name: "Bespoke Grooming Experience",
         category: "Grooming",
         description: "A tailored clipper or shear cut, straight razor beard shaping, and a revitalizing facial scrub.",
         duration: 60,
-        price: 95.00
+        price: 7600.00
       },
       {
         name: "Deep Tissue Mineral Massage",
         category: "Spa & Body",
         description: "Targeted deep tissue work incorporating warm basalt stones to melt tension and improve circulation.",
         duration: 90,
-        price: 180.00
+        price: 14400.00
       }
     ];
 

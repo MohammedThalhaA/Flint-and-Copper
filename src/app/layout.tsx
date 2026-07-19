@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
-import { CustomCursor } from "@/components/CustomCursor";
 import { CustomScrollbar } from "@/components/CustomScrollbar";
 import { NotificationProvider } from "@/components/NotificationProvider";
 
@@ -34,7 +33,6 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${fraunces.variable} antialiased`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col font-sans">
         <NotificationProvider>
-          <CustomCursor />
           <CustomScrollbar />
           {children}
         </NotificationProvider>

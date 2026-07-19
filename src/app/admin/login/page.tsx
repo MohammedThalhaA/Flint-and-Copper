@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Loader2 } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -40,23 +41,23 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-charcoal flex items-center justify-center p-6 text-ivory">
-      <div className="w-full max-w-md bg-[#1A1A1A] p-8 border border-dust/20 shadow-2xl">
+      <div className="w-full max-w-md bg-[#1A1A1A] p-8 border border-dust/20 shadow-2xl rounded-sm">
         <div className="text-center mb-10">
-          <h1 className="font-serif text-3xl font-light mb-2">
-            Flint <span className="text-copper italic">&</span> Copper
-          </h1>
+          <div className="flex justify-center mb-2">
+            <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={300} height={100} className="h-24 w-auto object-contain" />
+          </div>
           <p className="uppercase tracking-widest text-xs text-dust">Admin Portal</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-900/30 border border-red-500/50 text-red-200 text-sm text-center">
+          <div className="mb-6 p-4 bg-red-900/30 border border-red-500/50 text-red-200 text-sm text-center rounded-sm">
             {error}
           </div>
         )}
 
         <form onSubmit={handleLogin} className="flex flex-col gap-6">
           <div>
-            <label className="block text-xs uppercase tracking-widest mb-2 text-dust">Email Address</label>
+            <label className="block text-xs uppercase tracking-widest mb-2 text-dust/80">Email Address</label>
             <input
               type="email"
               value={email}
@@ -67,7 +68,7 @@ export default function AdminLoginPage() {
             />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-widest mb-2 text-dust">Password</label>
+            <label className="block text-xs uppercase tracking-widest mb-2 text-dust/80">Password</label>
             <input
               type="password"
               value={password}

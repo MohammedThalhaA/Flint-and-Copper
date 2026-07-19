@@ -49,7 +49,7 @@ async function main() {
       INSERT INTO offers (title, description, discount_text, is_active)
       VALUES 
       ('Summer Glow Package', 'Get ready for summer with our new glow package.', '20% OFF', true),
-      ('First Time Customer', 'Special discount for first time customers on any hair service.', '$25 OFF', true)
+      ('First Time Customer', 'Special discount for first time customers on any hair service.', '₹2000 OFF', true)
     `);
 
     console.log("Mock data seeded successfully.");

@@ -135,7 +135,7 @@ export function BookingForm({ services }: { services: Service[] }) {
               >
                 <div className="font-medium text-charcoal mb-1">{s.name}</div>
                 <div className="text-xs text-dust tracking-widest uppercase">
-                  {s.duration_minutes} Min • ${s.price}
+                  {s.duration_minutes} Min • ₹{s.price}
                 </div>
               </button>
             ))}

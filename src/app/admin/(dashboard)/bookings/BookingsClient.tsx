@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { Check, X, Loader2, Info } from "lucide-react";
+import { Check, X, Loader2, Info, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast, useConfirm } from "@/components/NotificationProvider";
 
@@ -52,6 +52,27 @@ export function BookingsClient({ initialBookings, services }: { initialBookings:
       }
     } catch (e) {
       toast("Error updating status", "error");
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!(await confirm("Are you sure you want to permanently delete this booking history?"))) return;
+    
+    setLoadingId(id);
+    try {
+      const res = await fetch(`/api/admin/bookings/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        toast("Booking deleted", "success");
+        router.refresh();
+      } else {
+        toast("Failed to delete booking", "error");
+      }
+    } catch (e) {
+      toast("Error deleting booking", "error");
     } finally {
       setLoadingId(null);
     }
@@ -141,6 +162,11 @@ export function BookingsClient({ initialBookings, services }: { initialBookings:
                             }
                           }} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded" title="Cancel">
                             <X size={16} />
+                          </button>
+                        )}
+                        {(booking.status === 'completed' || booking.status === 'cancelled') && (
+                          <button onClick={() => handleDelete(booking.id)} className="p-1.5 bg-gray-100 text-gray-500 hover:bg-red-100 hover:text-red-600 rounded transition-colors" title="Delete record">
+                            <Trash2 size={16} />
                           </button>
                         )}
                       </>

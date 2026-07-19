@@ -77,7 +77,7 @@ export default async function ServicesPage() {
                       <div className="flex items-center gap-6 text-sm text-dust font-medium uppercase tracking-widest">
                         <span>{service.duration_minutes} Min</span>
                         <span className="w-1 h-1 rounded-full bg-copper" />
-                        <span>${service.price}</span>
+                        <span>₹{service.price}</span>
                       </div>
                     </div>
                     

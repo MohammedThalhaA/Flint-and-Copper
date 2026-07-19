@@ -55,3 +55,16 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "Failed to update booking" }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id);
+
+    await query(`DELETE FROM bookings WHERE id = $1`, [id]);
+    return NextResponse.json({ success: true });
+  } catch (error: any) {
+    console.error("DELETE /api/admin/bookings error:", error);
+    return NextResponse.json({ error: "Failed to delete booking" }, { status: 500 });
+  }
+}

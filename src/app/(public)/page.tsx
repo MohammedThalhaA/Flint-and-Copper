@@ -122,7 +122,7 @@ export default async function HomePage() {
                   {service.description}
                 </p>
                 <div className="flex items-end justify-between mt-auto">
-                  <span className="text-copper font-light">${service.price}</span>
+                  <span className="text-copper font-light">₹{service.price}</span>
                   <Link
                     href={`/contact?service=${service.id}#booking`}
                     className="text-xs uppercase tracking-widest border-b border-copper text-ivory hover:text-copper transition-colors pb-1"
@@ -155,25 +155,31 @@ export default async function HomePage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {offers.map((offer: any) => (
-                <div key={offer.id} className="group relative bg-[#1A1A1A] border border-dust/10 flex flex-col sm:flex-row h-auto min-h-[250px] overflow-hidden">
+                <div key={offer.id} className="group relative bg-[#1A1A1A] border border-dust/20 hover:border-copper/40 transition-colors flex flex-col sm:flex-row h-auto min-h-[250px] overflow-hidden">
+                  {/* Voucher perforated edge effect on the left */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 border-l-[3px] border-dotted border-charcoal opacity-50 z-10"></div>
+                  
                   {offer.image_data && (
                     <div className="w-full sm:w-2/5 h-48 sm:h-auto relative overflow-hidden bg-charcoal">
                       <img src={offer.image_data} alt={offer.title} className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#1A1A1A] via-transparent to-transparent"></div>
                     </div>
                   )}
-                  <div className={`p-8 flex flex-col justify-center flex-1 ${!offer.image_data ? 'w-full' : 'sm:w-3/5'}`}>
+                  <div className={`p-8 md:p-10 flex flex-col justify-center flex-1 relative ${!offer.image_data ? 'w-full' : 'sm:w-3/5'}`}>
                     {offer.discount_text && (
-                      <span className="inline-block px-3 py-1 bg-copper/10 text-copper border border-copper/30 text-[10px] uppercase tracking-widest self-start mb-4">
-                        {offer.discount_text}
-                      </span>
+                      <div className="mb-4 relative">
+                        <span className="font-serif text-2xl md:text-3xl text-copper block leading-tight font-medium drop-shadow-sm">
+                          {offer.discount_text}
+                        </span>
+                      </div>
                     )}
-                    <h3 className="font-serif text-lg md:text-xl md:text-2xl font-light mb-3 text-ivory">{offer.title}</h3>
-                    <p className="text-dust/80 font-light text-sm leading-relaxed mb-6">
+                    <h3 className="font-serif text-xl md:text-2xl font-light mb-3 text-ivory uppercase tracking-wide">{offer.title}</h3>
+                    <p className="text-dust/80 font-light text-sm leading-relaxed mb-8 max-w-md">
                       {offer.description}
                     </p>
                     <Link
                       href="/contact#booking"
-                      className="mt-auto text-xs uppercase tracking-widest border-b border-copper text-copper hover:text-ivory hover:border-ivory transition-colors self-start pb-1"
+                      className="mt-auto px-6 py-3 bg-transparent border border-copper text-copper hover:bg-copper hover:text-ivory transition-colors duration-300 uppercase tracking-widest text-xs self-start"
                     >
                       Claim Offer
                     </Link>

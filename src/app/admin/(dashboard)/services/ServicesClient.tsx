@@ -148,7 +148,7 @@ export function ServicesClient({ initialServices }: { initialServices: Service[]
                 <input required type="text" value={formData.category || ''} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full border-b border-dust/30 py-2 focus:outline-none focus:border-copper" placeholder="e.g. Hair, Skin, Body" />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-widest mb-2 text-charcoal/70">Price ($)</label>
+                <label className="block text-xs uppercase tracking-widest mb-2 text-charcoal/70">Price (₹)</label>
                 <input required type="number" step="0.01" value={formData.price || ''} onChange={e => setFormData({...formData, price: parseFloat(e.target.value)})} className="w-full border-b border-dust/30 py-2 focus:outline-none focus:border-copper" />
               </div>
               <div>
@@ -195,7 +195,7 @@ export function ServicesClient({ initialServices }: { initialServices: Service[]
                         {!service.is_active && <span className="text-[10px] uppercase tracking-widest bg-dust/20 px-2 py-0.5 rounded-full text-charcoal/60">Inactive</span>}
                       </div>
                       <div className="text-sm text-charcoal/60 mt-1 flex gap-4">
-                        <span>${service.price}</span>
+                        <span>₹{service.price}</span>
                         <span>{service.duration_minutes} min</span>
                       </div>
                     </div>

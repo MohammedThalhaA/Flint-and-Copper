@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { InteractiveIcon } from "@/components/InteractiveIcon";
 
@@ -8,9 +9,9 @@ export function Footer() {
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <h2 className="font-serif text-3xl font-light text-ivory mb-6">
-              Flint <span className="text-copper italic">&</span> Copper
-            </h2>
+            <div className="mb-6">
+              <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={500} height={160} className="h-20 md:h-28 w-auto object-contain" />
+            </div>
             <p className="text-dust max-w-sm font-light leading-relaxed mb-8">
               A premium grooming and spa destination where the raw, mineral energy of flint 
               meets the warm, restorative glow of copper.
