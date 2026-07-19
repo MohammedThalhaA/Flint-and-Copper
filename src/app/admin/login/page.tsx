@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md bg-[#1A1A1A] p-8 border border-dust/20 shadow-2xl rounded-sm">
         <div className="text-center mb-10">
           <div className="flex justify-center mb-2">
-            <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={300} height={100} className="h-24 w-auto object-contain" />
+            <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={300} height={100} className="h-20 w-auto object-contain" />
           </div>
           <p className="uppercase tracking-widest text-xs text-dust">Admin Portal</p>
         </div>

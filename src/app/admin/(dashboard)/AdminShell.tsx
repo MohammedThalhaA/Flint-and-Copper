@@ -14,7 +14,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       {/* Mobile Header */}
       <header className="md:hidden flex items-center justify-between p-4 bg-charcoal text-ivory shrink-0 z-20 sticky top-0">
         <div>
-          <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={200} height={60} className="h-12 w-auto object-contain -translate-y-3" />
+          <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={200} height={60} className="h-10 w-auto object-contain -translate-y-1" />
           <p className="uppercase tracking-widest text-[8px] text-dust mt-1">Admin Portal</p>
         </div>
         <button 
@@ -40,7 +40,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         }`}
       >
         <div className="p-6 border-b border-dust/20 hidden md:block">
-          <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={250} height={80} className="h-16 w-auto object-contain -translate-y-4" />
+          <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={250} height={80} className="h-12 w-auto object-contain -translate-y-1.5" />
           <p className="uppercase tracking-widest text-[10px] text-dust mt-1">Admin Portal</p>
         </div>
         

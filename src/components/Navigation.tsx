@@ -48,7 +48,7 @@ export function Navigation() {
               "transition-all duration-300",
               (pathname === "/" && !isScrolled && !isMobileMenuOpen) ? "opacity-90" : "opacity-100"
             )}>
-              <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={500} height={160} className="h-10 md:h-12 w-auto object-contain scale-[1.3] md:scale-[1.5] origin-left -translate-y-1.5 md:-translate-y-2.5" priority />
+              <Image src="/logo_no_slogan.png" alt="Flint & Copper" width={500} height={160} className="h-10 md:h-12 w-auto object-contain scale-[1.15] md:scale-[1.25] origin-left -translate-y-1 md:-translate-y-1.5" priority />
             </div>
           </Link>
 
